@@ -1,6 +1,6 @@
 {
   "name": "getdev-bookstore",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "The getDev Book Store task",
   "main": "app-server.js",
   "scripts": {
