@@ -1,0 +1,46 @@
+{
+  "name": "getdev-bookstore",
+  "version": "1.0.0",
+  "description": "The getDev Book Store task",
+  "main": "app-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greyfinch/getdev-bookstore.git"
+  },
+  "keywords": [
+    "getDev"
+  ],
+  "author": "Onyejiaka Samuel Ikenna",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "email-templates": "^2.6.0",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.1",
+    "helmet": "^3.15.0",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "node-pre-gyp": "^0.12.0",
+    "nodemailer": "^2.7.2",
+    "parse-error": "^0.2.0",
+    "passport": "^0.4.0",
+    "path": "^0.12.7",
+    "req-flash": "0.0.3",
+    "sequelize": "^4.42.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "bugs": {
+    "url": "https://github.com/greyfinch/getdev-bookstore/issues"
+  },
+  "homepage": "https://github.com/greyfinch/getdev-bookstore#readme"
+}
