@@ -11,5 +11,6 @@ module.exports = {
     db_user:            process.env.DB_USER,
     db_password:        process.env.DB_PASSWORD,
     db_conn_limit:      process.env.DB_CONNECTION_LIMIT,
-    email_password:     process.env.EMAIL_PASSWORD
+    email_password:     process.env.EMAIL_PASSWORD,
+    session_secret:     process.env.SESSION_SECRET
 };

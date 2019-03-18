@@ -1,9 +1,9 @@
 //Load needed modules
 const express = require('express'),
         routes = express.Router();
-const UserController = require('../controllers/user-controller');
-const CategoryController = require('../controllers/book-category-controller');
-const BookController = require('../controllers/book-controller');
+const UserController = require('../controllers/user.controller');
+const CategoryController = require('../controllers/category.controller');
+const BookController = require('../controllers/book.controller');
 
 /*
     * Define Application Routes
@@ -11,8 +11,12 @@ const BookController = require('../controllers/book-controller');
 
 //Home Page
 routes.get('/', (req, res) => { return res.send('Welcome to getDev Book Store') });
+//Login a user
+routes.post('/login', UserController.userLogin);
+//Logout a user
+routes.get('/logout', UserController.userLogout);
 //Retrive All users
-routes.get('/users', UserController.allUsers);
+routes.get('/users', UserController.getAllUsers);
 //Create a new user
 routes.post('/createuser', UserController.createUser);
 //Retrive all book categories
@@ -20,7 +24,7 @@ routes.get('/bookcategories', CategoryController.bookCategories);
 //Add a new Category of book
 routes.post('/addbookcategory', CategoryController.addBookCategory);
 //Retrive all added book
-routes.get('/books', BookController.books);
+routes.get('/books', BookController.getAllbooks);
 //Add a new book
 routes.post('/addbook', BookController.addBook);
 //Update the details of a book

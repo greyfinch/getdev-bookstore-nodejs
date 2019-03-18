@@ -1,15 +1,29 @@
 //Load modules
 const path = require('path');
 const cors = require('cors');
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-const mysql = require('mysql');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const dbUtility = require('./db/db_utility');
 const routes = require('./routes/routes');
 const express = require('express');
+const session = require('express-session')
 const config = require('./config/config');
 
 const getDevApp = express();
+
+getDevApp.use(session({
+    secret: config.session_secret,
+    resave: true,
+    saveUninitialized: true
+}));
+
+//database connection
+dbUtility.checkConnection().then((data) => {
+    console.log(data);
+}).catch((error) => {
+    console.log(error);
+})
 
 //view engine setup
 getDevApp.set('views', path.join(__dirname, 'views'));
@@ -33,18 +47,6 @@ getDevApp.use(function(req, res, next) {
        next();
      }
 });
-  
-getDevApp.use(function(req, res, next) {
-    global.connectionPool = mysql.createPool({
-    connectionLimit :config.db_connection_limit,
-    host         : config.db_host,
-    user        : config.db_user,
-    password    : config.db_password,
-    database    : config.db_name,
-    multipleStatements: true,
-    });
-    next();
-});
 
 getDevApp.use('/api/v1', routes);
 
@@ -59,7 +61,7 @@ getDevApp.use(function(req, res, next) {
 
 
 // error handler
-getDevApp.use(function(err, req, res, next) {
+/* getDevApp.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.getDevApp.get('env') === 'development' ? err : {};
@@ -67,7 +69,7 @@ getDevApp.use(function(err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
-});
+}); */
 
 module.exports = getDevApp;
 const port = config.port;
