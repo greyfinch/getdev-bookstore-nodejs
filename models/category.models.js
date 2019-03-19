@@ -8,15 +8,16 @@ categoryModel = {
     getCategoryById:getCategoryById
 };
 
-function addBookCategory(categoryDetails) {
+function addBookCategory(req) {
+    console.log(req.body);
     return new Promise((resolve,reject) => {
-        this.getCategoryByName(categoryDetails.categoryName).then((data) => {
+        this.getCategoryByName(req.body.categoryName).then((data) => {
             console.log(data)
             if(data.length === 0) {
-                let currentTime = Math.round((new Date()).getTime() / 1000);
+               let currentTime = Math.round((new Date()).getTime() / 1000);
                 let insertValues = {
-                    cat_name: categoryDetails.categoryName,
-                    created_by: categoryDetails.userID,
+                    cat_name: req.body.categoryName,
+                    created_by: req.session.userid,
                     time_created: currentTime
                 }
                 db.query('insert into book_categories set ?',insertValues, (error, result) => {
@@ -27,7 +28,8 @@ function addBookCategory(categoryDetails) {
                         dbUtility.releaseConnection;
                         resolve(result);
                     }
-                })
+                });
+
             }else{
                 reject("Category Name Already exists, pick another one");
             }

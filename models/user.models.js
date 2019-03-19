@@ -10,22 +10,23 @@ const userModel = {
     getUserById:getUserById
 };
 
-function userLogin(request){
+function userLogin(req) {
     return new Promise((resolve,reject) => {
-        db.query('select * from app_users where username = ?',request.body.userName, (error,result) =>{
+        db.query('select * from app_users where username = ?',req.body.userName, (error,result) =>{
             if(!!error){
                 dbUtility.releaseConnection;
                 reject(error);
             }else{ 
                 //check if password matches       
                 let encryptedPassword = result[0].password;
-                let checkPassword = bcrypt.compareSync(request.body.userPassword, encryptedPassword);        
+                let checkPassword = bcrypt.compareSync(req.body.userPassword, encryptedPassword);        
                 if(!checkPassword) {                    
                     resolve("Invalid Login details. Username or password is wrong")
                 }else{                    
                     //set login session
-                    request.session.loggedin = true;
-                    request.session.userame = request.body.userName;
+                    req.session.loggedin = true;
+                    req.session.userame = req.body.userName;
+                    req.session.userid = result[0].user_id;
                     dbUtility.releaseConnection;
                     resolve("User Logged in sucsessfully");
                 }
@@ -34,19 +35,19 @@ function userLogin(request){
     })
 }
 
-function createUser(userDetails) {
+function createUser(req) {
     return new Promise((resolve,reject) => {
         //check if username already exists for another user
-        this.getUserByUsername(userDetails.username).then((data) => {
+        this.getUserByUsername(req.body.username).then((data) => {
             if(data.length === 0) {
                 
                 let currentTime = Math.round((new Date()).getTime() / 1000);
-                let password  =  bcrypt.hashSync(userDetails.userpassword);
+                let password  =  bcrypt.hashSync(req.body.userpassword);
 
                 let insertValues = {
-                    username: userDetails.username,
+                    username: req.body.username,
                     password: password,
-                    created_by: userDetails.userID,
+                    created_by: req.session.userid,
                     time_created: currentTime
                 }
 
@@ -56,7 +57,7 @@ function createUser(userDetails) {
                         reject(error);
                     }else{
                         dbUtility.releaseConnection;
-                        resolve("User "+userDetails.username+" created successfully");
+                        resolve("User "+req.body.username+" created successfully");
                     }
                 });
             }else{

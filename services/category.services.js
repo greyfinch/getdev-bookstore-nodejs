@@ -6,9 +6,9 @@ const categoryService = {
     getCategoryByName:getCategoryByName
 }
 
-function addBookCategory(categoryDetails) {
+function addBookCategory(req) {
     return new Promise((resolve,reject) => {
-        categoryModel.addBookCategory(categoryDetails).then((returnedData) => {
+        categoryModel.addBookCategory(req).then((returnedData) => {
             resolve(returnedData);
         }).catch((error) => {
             reject(error);

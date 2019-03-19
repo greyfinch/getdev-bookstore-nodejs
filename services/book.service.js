@@ -5,10 +5,8 @@ bookService = {
     rateBook:rateBook,
     updateBook:updateBook,
     deleteBook:deleteBook,
-    getBookById:getBookById,
     getAllbooks:getAllbooks,
-    addBookStock:addBookStock,
-    getBookByName:getBookByName
+    addBookStock:addBookStock
 }
 
 function getAllbooks() {
@@ -21,9 +19,9 @@ function getAllbooks() {
    });
 }
 
-function addBook(bookDetails) {
+function addBook(req) {
     return new Promise((resolve, reject) => {
-        bookModel.addBook(bookDetails).then((returnedData) => {
+        bookModel.addBook(req).then((returnedData) => {
             resolve(returnedData);
         }).catch((error) => {
             reject(error);
@@ -31,28 +29,44 @@ function addBook(bookDetails) {
     })
 }
 
-function rateBook(rateDetails) {
-    
+function rateBook(req) {
+    return new Promise((resolve, reject) => {
+        bookModel.rateBook(req).then((returnedData) => {
+            resolve(returnedData);
+        }).catch((error) => {
+            reject(error);
+        });
+    })  
 }
 
 function updateBook(bookDetails) {
-    
+    return new Promise((resolve, reject) => {
+        bookModel.updateBook(bookDetails).then((returnedData) => {
+            resolve(returnedData);
+        }).catch((error) => {
+            reject(error);
+        });
+    })  
 }
 
 function deleteBook(bookDetails){
-
+    return new Promise((resolve, reject) => {
+        bookModel.deleteBook(bookDetails).then((returnedData) => {
+            resolve(returnedData);
+        }).catch((error) => {
+            reject(error);
+        });
+    }) 
 }
 
-function addBookStock(stockDetails) {
-    
-}
-
-function getBookById(bookID) {
-    
-}
-
-function getBookByName(bookName) {
-    
+function addBookStock(req) {
+    return new Promise((resolve, reject) => {
+        bookModel.addBookStock(req).then((returnedData) => {
+            resolve(returnedData);
+        }).catch((error) => {
+            reject(error);
+        });
+    }) 
 }
 
 

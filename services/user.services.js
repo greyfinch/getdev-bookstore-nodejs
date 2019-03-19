@@ -5,12 +5,13 @@ const userServices = {
     createUser:createUser,
     getAllUsers:getAllUsers,
     getUserByUsername:getUserByUsername,
-    getUserById:getUserById
+    getUserById:getUserById,
+    getUserSession:getUserSession
 };
 
-function userLogin(credentials) {
+function userLogin(req) {
     return new Promise((resolve,reject) => {
-        userModel.userLogin(credentials).then((returnedData) => {
+        userModel.userLogin(req).then((returnedData) => {
             resolve(returnedData);
         }).catch((error) => {
             reject(error);
@@ -18,9 +19,9 @@ function userLogin(credentials) {
     })
 }
 
-function createUser(userDetails) {
+function createUser(req) {
     return new Promise((resolve,reject) => {
-        userModel.createUser(userDetails).then((returnData) => {
+        userModel.createUser(req).then((returnData) => {
             resolve(returnData);
         }).catch((error) => {
             reject(error);
@@ -56,6 +57,16 @@ function getUserById(userID) {
             reject(error);
         });
     });
+}
+
+function getUserSession(request) {
+    return new Promise((resolve,reject) => {
+        if(request.session.loggedin) {
+            resolve(true)
+        }else{
+            reject("Please login to complete this operation");
+        }
+    })
 }
 
 module.exports = userServices;
