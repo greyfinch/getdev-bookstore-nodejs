@@ -10,10 +10,8 @@ We run a bookstore, we are planning to build our mobile app in the nearest futur
 
 ### Usage
 
-Below are the different endpoints for the application can be imported into postman for testing
-
 ```
-
+import the file getDev_Book_Store.postman_collection into your postman for easy testing.
 ```
 
 
