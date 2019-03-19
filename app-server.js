@@ -5,18 +5,15 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dbUtility = require('./db/db_utility');
-const routes = require('./routes/routes');
+const v1Routes = require('./routes/v1Routes');
 const express = require('express');
 const session = require('express-session')
 const config = require('./config/config');
 
+//initialize Express App
 const getDevApp = express();
 
-getDevApp.use(session({
-    secret: config.session_secret,
-    resave: true,
-    saveUninitialized: true
-}));
+
 
 //database connection
 dbUtility.checkConnection().then((data) => {
@@ -29,13 +26,20 @@ dbUtility.checkConnection().then((data) => {
 getDevApp.set('views', path.join(__dirname, 'views'));
 getDevApp.set('view engine', 'ejs');
 
+/**** * middleware setup* * ****/
+
+//Sesson initialization
+getDevApp.use(session({ 
+    secret: config.session_secret,
+    resave: true,
+    saveUninitialized: true
+}));
 getDevApp.use(morgan('dev'));
 getDevApp.use(express.json());
 getDevApp.use(bodyParser.json());
 getDevApp.use(cors());
 getDevApp.use(bodyParser.urlencoded({ extended: false }));
 getDevApp.use(cookieParser());
-
 getDevApp.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
@@ -48,7 +52,8 @@ getDevApp.use(function(req, res, next) {
      }
 });
 
-getDevApp.use('/api/v1', routes);
+//set Routes
+getDevApp.use('/api/v1', v1Routes);
 
 
 // catch 404 and forward to error handler

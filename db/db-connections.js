@@ -1,3 +1,6 @@
+/*****
+ * creat db connection
+ * *****/
 const mysql = require('mysql');
 const configs = require('../config/config');
 

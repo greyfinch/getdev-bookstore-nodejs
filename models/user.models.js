@@ -1,4 +1,8 @@
-const db = require('../db/db-connections');
+/*****
+ * Define user model
+ * *****/
+
+ const db = require('../db/db-connections');
 const dbUtility = require('../db/db_utility');
 const bcrypt = require('bcryptjs');
 
@@ -12,15 +16,16 @@ const userModel = {
 
 function userLogin(req) {
     return new Promise((resolve,reject) => {
+        //check if user exists in db
         db.query('select * from app_users where username = ?',req.body.userName, (error,result) =>{
-            if(!!error){
+            if(!!error){ //if user does not exists, run these lines
                 dbUtility.releaseConnection;
                 reject(error);
-            }else{ 
+            }else{ //if user exists, run these lines
                 //check if password matches       
                 let encryptedPassword = result[0].password;
                 let checkPassword = bcrypt.compareSync(req.body.userPassword, encryptedPassword);        
-                if(!checkPassword) {                    
+                if(!checkPassword) {   //if password does not match                  
                     resolve("Invalid Login details. Username or password is wrong")
                 }else{                    
                     //set login session
@@ -50,7 +55,7 @@ function createUser(req) {
                     created_by: req.session.userid,
                     time_created: currentTime
                 }
-
+                //insert new user record into db
                 db.query('INSERT INTO app_users SET ?',insertValues, (error,result) => {
                     if(!!error){
                         dbUtility.releaseConnection;

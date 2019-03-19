@@ -1,4 +1,12 @@
+/*****
+ * the file defines db functions.
+ *  for checking connection to db 
+ * and releasing db connections 
+ * *****/
+
+
 const db = require('./db-connections');
+
 
 exports.checkConnection = () => {
   return new Promise((resolve, reject) => {

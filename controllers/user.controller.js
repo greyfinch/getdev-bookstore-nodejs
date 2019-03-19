@@ -1,4 +1,8 @@
-const userService = require('../services/user.services')
+/*****
+ * Define user controller
+ * *****/
+
+ const userService = require('../services/user.services')
 const userValidator = require('../utilities/user.validate');
 
 exports.userLogin = (req, res) => {
