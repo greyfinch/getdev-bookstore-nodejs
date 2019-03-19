@@ -1,1 +1,586 @@
-# getdev-bookstore
+# GetDev Book Store
+
+This project is a task given by GetDev to programmers
+
+## Problem Statemet
+
+Problem Statement
+
+We run a bookstore, we are planning to build our mobile app in the nearest future, however we do not currently have an API to make the Apps work. Develop a solution that will help us show our inventory, allow readers view and rate books.
+
+### Usage
+
+Below are the different endpoints for the application can be imported into postman for testing
+
+```
+{
+	"info": {
+		"_postman_id": "73d0a0bf-975b-4925-99ab-33194534389d",
+		"name": "getDev Book Store",
+		"description": "getDev Book Store task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Book Categories",
+			"item": [
+				{
+					"name": "Add Book Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoryName",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/addbookcategory",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addbookcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Book Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/bookcategories",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bookcategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "userpassword",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/createuser",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"createuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/users",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/logout",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "userPassword",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/login",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/books",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a New Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoryID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bookName",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/addbook",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Stock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "qty",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "supplyDate",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/addstock",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addstock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book Details",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "categoryID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bookName",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/updatebook",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"updatebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookID",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/deletebook",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deletebook"
+							]
+						},
+						"description": "This deletes a book and all associated data in both book stocks and book rating."
+					},
+					"response": []
+				},
+				{
+					"name": "Rate a Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ratingStar",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://getdev-bookstore.herokuapp.com/api/v1/ratebook",
+							"protocol": "https",
+							"host": [
+								"getdev-bookstore",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ratebook"
+							]
+						},
+						"description": "This is used to rate a book. A user can only rate a book once"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userEmail",
+							"value": "ikenna@niddify.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "098",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://getdev-bookstore.herokuapp.com/api/v1/",
+					"protocol": "https",
+					"host": [
+						"getdev-bookstore",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c90540cd-665c-4e1b-a9d1-848e0ec9e4ba",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5e5b3459-2e01-448b-a3ba-e3c08b99c0f4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
+```
+
+
